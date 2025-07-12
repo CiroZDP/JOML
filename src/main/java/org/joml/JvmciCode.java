@@ -23,6 +23,10 @@
  */
 package org.joml;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.Set;
+
 //#ifdef __HAS_JVMCI__
 import jdk.vm.ci.amd64.AMD64;
 import jdk.vm.ci.code.Architecture;
@@ -342,7 +346,8 @@ class JvmciCode {
       TargetDescription targetDesc = jvmciBackend.getTarget();
       Architecture arch = targetDesc.arch;
       AMD64 amd64arch = (AMD64) arch;
-      Set features = amd64arch.getFeatures();
+      @SuppressWarnings("unchecked")
+	  Set<AMD64.CPUFeature> features = (Set<AMD64.CPUFeature>) amd64arch.getFeatures();
       if (!features.contains(AMD64.CPUFeature.AVX) || !features.contains(AMD64.CPUFeature.FMA))
         throw new AssertionError("CPU lacks AVX or FMA support");
       checkMatrix4f();
