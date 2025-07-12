@@ -1536,21 +1536,22 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc {
     }
 
     public Matrix4f mulLocalAffine(Matrix4fc left, Matrix4f dest) {
-        float nm00 = left.m00() * m00() + left.m10() * m01() + left.m20() * m02();
-        float nm01 = left.m01() * m00() + left.m11() * m01() + left.m21() * m02();
-        float nm02 = left.m02() * m00() + left.m12() * m01() + left.m22() * m02();
+    	// TODO: Make Math.fma a static import
+        float nm00 = Math.fma(left.m00(), m00(), Math.fma(left.m10(), m01(), left.m20() * m02()));
+        float nm01 = Math.fma(left.m01(), m00(), Math.fma(left.m11(), m01(), left.m21() * m02()));
+        float nm02 = Math.fma(left.m02(), m00(), Math.fma(left.m12(), m01(), left.m22() * m02()));
         float nm03 = left.m03();
-        float nm10 = left.m00() * m10() + left.m10() * m11() + left.m20() * m12();
-        float nm11 = left.m01() * m10() + left.m11() * m11() + left.m21() * m12();
-        float nm12 = left.m02() * m10() + left.m12() * m11() + left.m22() * m12();
+        float nm10 = Math.fma(left.m00(), m10(), Math.fma(left.m10(), m11(), left.m20() * m12()));
+        float nm11 = Math.fma(left.m01(), m10(), Math.fma(left.m11(), m11(), left.m21() * m12()));
+        float nm12 = Math.fma(left.m02(), m10(), Math.fma(left.m12(), m11(), left.m22() * m12()));
         float nm13 = left.m13();
-        float nm20 = left.m00() * m20() + left.m10() * m21() + left.m20() * m22();
-        float nm21 = left.m01() * m20() + left.m11() * m21() + left.m21() * m22();
-        float nm22 = left.m02() * m20() + left.m12() * m21() + left.m22() * m22();
+        float nm20 = Math.fma(left.m00(), m20(), Math.fma(left.m10(), m21(), left.m20() * m22()));
+        float nm21 = Math.fma(left.m01(), m20(), Math.fma(left.m11(), m21(), left.m21() * m22()));
+        float nm22 = Math.fma(left.m02(), m20(), Math.fma(left.m12(), m21(), left.m22() * m22()));
         float nm23 = left.m23();
-        float nm30 = left.m00() * m30() + left.m10() * m31() + left.m20() * m32() + left.m30();
-        float nm31 = left.m01() * m30() + left.m11() * m31() + left.m21() * m32() + left.m31();
-        float nm32 = left.m02() * m30() + left.m12() * m31() + left.m22() * m32() + left.m32();
+        float nm30 = Math.fma(left.m00(), m30(), Math.fma(left.m10(), m31(), Math.fma(left.m20(), m32(), left.m30())));
+        float nm31 = Math.fma(left.m01(), m30(), Math.fma(left.m11(), m31(), Math.fma(left.m21(), m32(), left.m31())));
+        float nm32 = Math.fma(left.m02(), m30(), Math.fma(left.m12(), m31(), Math.fma(left.m22(), m32(), left.m32())));
         float nm33 = left.m33();
         return dest
         ._m00(nm00)
