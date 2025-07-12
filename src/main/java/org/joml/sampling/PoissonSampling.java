@@ -56,7 +56,7 @@ public class PoissonSampling {
         private final float cellSize;
         private final int numCells;
         private final Random rnd;
-        private final ArrayList processList;
+        private final ArrayList<Vector2f> processList;
 
         /**
          * Create a new instance of {@link Disk} which computes poisson-distributed samples on a disk with the given radius <code>diskRadius</code> and notifies the given
@@ -84,7 +84,7 @@ public class PoissonSampling {
             this.cellSize = minDist / (float) Math.sqrt(2.0);
             this.numCells = (int) ((diskRadius * 2) / cellSize) + 1;
             this.grid = new Vector2f[numCells * numCells];
-            this.processList = new ArrayList();
+            this.processList = new ArrayList<>();
             compute(k, callback);
         }
 

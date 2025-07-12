@@ -49,10 +49,6 @@ public class Quaternionf implements Externalizable, Cloneable, Quaternionfc {
      */
     public static final int BYTES = 4*Float.BYTES;
 
-//#ifdef __HAS_JVMCI__
-    private int __pad;
-//#endif
-
     /**
      * The real/scalar part of the quaternion.
      */

@@ -254,12 +254,6 @@ public class Matrix2f implements Externalizable, Cloneable, Matrix2fc {
         }
         return this;
     }
-    private void setMatrix2fc(Matrix2fc mat) {
-        m00 = mat.m00();
-        m01 = mat.m01();
-        m10 = mat.m10();
-        m11 = mat.m11();
-    }
 
     /**
      * Set the elements of this matrix to the left 2x2 submatrix of <code>m</code>.

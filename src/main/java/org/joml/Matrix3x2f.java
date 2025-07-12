@@ -231,14 +231,6 @@ public class Matrix3x2f implements Matrix3x2fc, Externalizable, Cloneable {
         }
         return this;
     }
-    private void setMatrix3x2fc(Matrix3x2fc mat) {
-        m00 = mat.m00();
-        m01 = mat.m01();
-        m10 = mat.m10();
-        m11 = mat.m11();
-        m20 = mat.m20();
-        m21 = mat.m21();
-    }
 
     /**
      * Set the left 2x2 submatrix of this {@link Matrix3x2f} to the given {@link Matrix2fc} and don't change the other elements.

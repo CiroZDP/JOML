@@ -36,6 +36,7 @@ import java.nio.*;
  * @author The LWJGL authors
  * @author Kai Burjack
  */
+@SuppressWarnings("deprecation")
 abstract class MemUtil {
     public static final MemUtil INSTANCE = createInstance();
     private static MemUtil createInstance() {
@@ -4156,15 +4157,13 @@ abstract class MemUtil {
             return Vector2i_x;
         }
 
-        private static java.lang.reflect.Field getDeclaredField(Class root, String fieldName) throws NoSuchFieldException {
-            Class type = root;
+        private static java.lang.reflect.Field getDeclaredField(Class<?> root, String fieldName) throws NoSuchFieldException {
+            Class<?> type = root;
             do {
                 try {
                     java.lang.reflect.Field field = type.getDeclaredField(fieldName);
                     return field;
-                } catch (NoSuchFieldException e) {
-                    type = type.getSuperclass();
-                } catch (SecurityException e) {
+                } catch (NoSuchFieldException | SecurityException e) {
                     type = type.getSuperclass();
                 }
             } while (type != null);
